@@ -85,9 +85,9 @@ class Router {
       pageTitle = `Contact & Transmission — ${config.name}`;
       showFooterCTA = false;
       postRenderInit = () => initContactEvents();
-    } else if (hash === '/admin' || hash.startsWith('/admin/')) {
+    } else if (hash === '/backstage' || hash.startsWith('/backstage/')) {
       viewHtml = renderAdmin();
-      pageTitle = `Studio Admin CMS — ${config.name}`;
+      pageTitle = `Backstage Studio — ${config.name}`;
       showFooterCTA = false;
       postRenderInit = () => initAdminEvents(() => this.handleRoute(false));
     } else {

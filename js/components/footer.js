@@ -1,6 +1,6 @@
 /**
  * Footer Component
- * Minimal editorial footer with contact CTA, social links, and admin shortcut
+ * Minimal editorial footer with collaborative CTA and clean public links
  */
 
 import { store } from '../store.js';
@@ -79,11 +79,6 @@ export function renderFooter(showCTA = true) {
                   </a>
                 </li>
               ` : ''}
-              <li>
-                <a href="#/admin" style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">
-                  Admin Portal 🔒
-                </a>
-              </li>
             </ul>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { store } from '../store.js';
 
 export function renderNavbar(currentPath) {
   const config = store.getConfig();
-  const isAdmin = currentPath.startsWith('/admin');
+  const isBackstage = currentPath.startsWith('/backstage');
 
   // Determine active states
   const isWork = currentPath.startsWith('/work');
@@ -41,9 +41,9 @@ export function renderNavbar(currentPath) {
           <li class="nav-item">
             <a href="#/resume" class="${isResume ? 'active' : ''}">Resume</a>
           </li>
-          ${isAdmin ? `
+          ${isBackstage ? `
             <li class="nav-item">
-              <a href="#/admin" class="active" style="color: var(--accent);">Admin CMS</a>
+              <a href="#/backstage" class="active" style="color: var(--accent);">Backstage</a>
             </li>
           ` : ''}
         </ul>
@@ -66,7 +66,6 @@ export function renderNavbar(currentPath) {
         <a href="#/about" class="mobile-nav-link">About</a>
         <a href="#/resume" class="mobile-nav-link">Resume</a>
         <a href="#/contact" class="mobile-nav-link">Contact →</a>
-        <a href="#/admin" class="mobile-nav-link" style="font-size: 1.4rem; color: var(--text-muted); font-family: var(--font-mono);">Admin Portal 🔒</a>
       </div>
     </header>
   `;

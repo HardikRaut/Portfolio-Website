@@ -92,20 +92,19 @@ function renderLogin() {
     <div class="container">
       <div class="glass-panel admin-login-box">
         <span class="mono-label" style="color: var(--accent);">RESTRICTED AREA</span>
-        <h3>Admin Portal</h3>
-        <p>Enter the private admin passcode to manage portfolio content, research logs, and site settings.</p>
+        <h3>Backstage Studio</h3>
+        <p>Enter the private backstage passcode to manage portfolio content, research logs, and system settings.</p>
 
         <form class="admin-login-form" id="admin-login-form">
           <div class="form-group" style="text-align: left;">
             <label for="admin-pass" class="form-label">Passcode</label>
-            <input type="password" id="admin-pass" class="form-input" placeholder="Enter admin passcode (e.g. builder2026)" required autofocus />
+            <input type="password" id="admin-pass" class="form-input" placeholder="Enter access passcode" required autofocus />
           </div>
 
           <button type="submit" class="btn-primary" style="padding: 0.85rem;">
             Authenticate <span>→</span>
           </button>
         </form>
-        <p style="margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Default development passcode: builder2026</p>
       </div>
     </div>
   `;
@@ -339,10 +338,10 @@ export function initAdminEvents(rerender) {
       e.preventDefault();
       const pass = document.getElementById('admin-pass').value;
       if (store.login(pass)) {
-        showToast('Authentication successful. Welcome to Studio CMS.', 'success');
+        showToast('Authentication successful. Welcome to Backstage.', 'success');
         rerender();
       } else {
-        showToast('Invalid passcode. Try "builder2026"', 'error');
+        showToast('Invalid passcode. Access denied.', 'error');
       }
     });
     return;

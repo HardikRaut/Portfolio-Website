@@ -56,8 +56,8 @@ class PortfolioStore {
   }
 
   login(password) {
-    // Default admin passcode: "builder2026" or any custom value stored in config
-    const valid = password === 'builder2026' || password === (this.data.config.adminPassword || 'builder2026');
+    // Secret backstage passcode
+    const valid = password === 'Space_Heart8104' || password === (this.data.config.adminPassword || 'Space_Heart8104');
     if (valid) {
       localStorage.setItem(AUTH_KEY, 'true');
       return true;
