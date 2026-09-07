@@ -604,6 +604,54 @@ function openProjectEditor(project, rerender) {
           </div>
         </div>
 
+        <!-- Photography Archive (Gallery Images & Videos) -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div>
+              <h4 style="font-size: 1.15rem;">Photography Archive (Images & Videos)</h4>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Hardware close-ups, testbench photos, CAD renders, and video demonstration links.</p>
+            </div>
+            <button type="button" class="btn-secondary btn-small" id="btn-add-gallery-row" style="padding: 0.35rem 0.75rem;">
+              + Add Media Item
+            </button>
+          </div>
+
+          <div id="gallery-form-container" style="display: flex; flex-direction: column; gap: 0.6rem;">
+            ${(p.gallery && p.gallery.length > 0 ? p.gallery : [{ url: '', caption: '' }]).map(g => `
+              <div class="gallery-input-row" style="display: grid; grid-template-columns: 1.2fr 1.5fr 34px; gap: 0.6rem; align-items: center;">
+                <input type="text" class="form-input gallery-url-input" placeholder="Media Path / URL (e.g. assets/images/workbench.jpg)" value="${g.url || ''}" />
+                <input type="text" class="form-input gallery-caption-input" placeholder="Caption (e.g. Mechanism during tape tension calibration)" value="${g.caption || ''}" />
+                <button type="button" class="btn-small btn-danger btn-remove-gallery" style="height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Remove this media item">✕</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Engineering Assets (Documents & Technical Files) -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div>
+              <h4 style="font-size: 1.15rem;">Engineering Assets (Documentation & Files)</h4>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Research papers, STEP CAD packages, P&ID drawings, CSV telemetry logs, and ZIP downloads.</p>
+            </div>
+            <button type="button" class="btn-secondary btn-small" id="btn-add-doc-row" style="padding: 0.35rem 0.75rem;">
+              + Add Asset File
+            </button>
+          </div>
+
+          <div id="docs-form-container" style="display: flex; flex-direction: column; gap: 0.6rem;">
+            ${(p.documents && p.documents.length > 0 ? p.documents : [{ name: '', type: 'PDF Report', size: '2.5 MB', filename: '' }]).map(d => `
+              <div class="doc-input-row" style="display: grid; grid-template-columns: 1.3fr 0.9fr 0.7fr 1.1fr 34px; gap: 0.5rem; align-items: center;">
+                <input type="text" class="form-input doc-name-input" placeholder="Asset Title (e.g. CAD Solid Model)" value="${d.name || ''}" />
+                <input type="text" class="form-input doc-type-input" placeholder="Type (e.g. STEP / PDF)" value="${d.type || 'PDF'}" />
+                <input type="text" class="form-input doc-size-input" placeholder="Size (e.g. 4.2 MB)" value="${d.size || ''}" />
+                <input type="text" class="form-input doc-filename-input" placeholder="Filename / URL (e.g. Model_CAD.step)" value="${d.filename || ''}" />
+                <button type="button" class="btn-small btn-danger btn-remove-doc" style="height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Remove this document asset">✕</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
         <!-- Case Study Narrative Blocks -->
         <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
           <h4 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Case Study Narrative Chapters</h4>
@@ -695,6 +743,64 @@ function openProjectEditor(project, rerender) {
     });
   }
 
+  // Attach dynamic gallery row handlers
+  const galleryContainer = document.getElementById('gallery-form-container');
+  const addGalleryBtn = document.getElementById('btn-add-gallery-row');
+
+  if (addGalleryBtn && galleryContainer) {
+    addGalleryBtn.addEventListener('click', () => {
+      const row = document.createElement('div');
+      row.className = 'gallery-input-row';
+      row.style.cssText = 'display: grid; grid-template-columns: 1.2fr 1.5fr 34px; gap: 0.6rem; align-items: center;';
+      row.innerHTML = `
+        <input type="text" class="form-input gallery-url-input" placeholder="Media Path / URL (e.g. assets/images/...)" />
+        <input type="text" class="form-input gallery-caption-input" placeholder="Caption (e.g. Testbench setup during trial)" />
+        <button type="button" class="btn-small btn-danger btn-remove-gallery" style="height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Remove this media item">✕</button>
+      `;
+      galleryContainer.appendChild(row);
+
+      row.querySelector('.btn-remove-gallery').addEventListener('click', () => {
+        row.remove();
+      });
+    });
+
+    galleryContainer.querySelectorAll('.btn-remove-gallery').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.target.closest('.gallery-input-row').remove();
+      });
+    });
+  }
+
+  // Attach dynamic documents row handlers
+  const docsContainer = document.getElementById('docs-form-container');
+  const addDocBtn = document.getElementById('btn-add-doc-row');
+
+  if (addDocBtn && docsContainer) {
+    addDocBtn.addEventListener('click', () => {
+      const row = document.createElement('div');
+      row.className = 'doc-input-row';
+      row.style.cssText = 'display: grid; grid-template-columns: 1.3fr 0.9fr 0.7fr 1.1fr 34px; gap: 0.5rem; align-items: center;';
+      row.innerHTML = `
+        <input type="text" class="form-input doc-name-input" placeholder="Asset Title (e.g. Telemetry Log)" />
+        <input type="text" class="form-input doc-type-input" placeholder="Type (e.g. CSV / PDF)" value="PDF" />
+        <input type="text" class="form-input doc-size-input" placeholder="Size (e.g. 1.2 MB)" value="1.0 MB" />
+        <input type="text" class="form-input doc-filename-input" placeholder="Filename / URL (e.g. Log.csv)" />
+        <button type="button" class="btn-small btn-danger btn-remove-doc" style="height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Remove this document asset">✕</button>
+      `;
+      docsContainer.appendChild(row);
+
+      row.querySelector('.btn-remove-doc').addEventListener('click', () => {
+        row.remove();
+      });
+    });
+
+    docsContainer.querySelectorAll('.btn-remove-doc').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.target.closest('.doc-input-row').remove();
+      });
+    });
+  }
+
   const form = document.getElementById('project-editor-form');
   if (form) {
     form.addEventListener('submit', (e) => {
@@ -718,6 +824,38 @@ function openProjectEditor(project, rerender) {
         .map(t => t.trim())
         .filter(t => t.length > 0);
 
+      // Collect gallery array
+      const galleryRows = galleryContainer ? galleryContainer.querySelectorAll('.gallery-input-row') : [];
+      const gallery = [];
+      galleryRows.forEach(row => {
+        const url = row.querySelector('.gallery-url-input')?.value.trim();
+        const caption = row.querySelector('.gallery-caption-input')?.value.trim();
+        if (url || caption) {
+          gallery.push({
+            url: url || 'assets/images/workbench.jpg',
+            caption: caption || ''
+          });
+        }
+      });
+
+      // Collect documents array
+      const docRows = docsContainer ? docsContainer.querySelectorAll('.doc-input-row') : [];
+      const documents = [];
+      docRows.forEach(row => {
+        const name = row.querySelector('.doc-name-input')?.value.trim();
+        const type = row.querySelector('.doc-type-input')?.value.trim();
+        const size = row.querySelector('.doc-size-input')?.value.trim();
+        const filename = row.querySelector('.doc-filename-input')?.value.trim();
+        if (name || filename) {
+          documents.push({
+            name: name || 'Technical Document',
+            type: type || 'PDF',
+            size: size || '1.0 MB',
+            filename: filename || 'document.pdf'
+          });
+        }
+      });
+
       const updated = {
         ...p,
         title: document.getElementById('pe-title').value,
@@ -731,6 +869,8 @@ function openProjectEditor(project, rerender) {
         shortDescription: document.getElementById('pe-desc').value,
         specs: specs,
         tags: tags,
+        gallery: gallery,
+        documents: documents,
         story: {
           ...(p.story || {}),
           problem: document.getElementById('pe-problem')?.value || '',
@@ -748,7 +888,7 @@ function openProjectEditor(project, rerender) {
 
       store.saveProject(updated);
       closeModal();
-      showToast('Project saved with specifications and tags!', 'success');
+      showToast('Project saved with gallery, assets & specifications!', 'success');
       rerender();
     });
   }
