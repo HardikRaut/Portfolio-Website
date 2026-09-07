@@ -43,7 +43,7 @@ export function renderResume() {
             <div style="text-align: right; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
               <div>${config.email}</div>
               <div>${config.location}</div>
-              <div>linkedin.com/in/hardik-raut</div>
+              <div>linkedin.com/in/hardik-raut-09164936b</div>
             </div>
           </header>
 

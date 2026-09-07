@@ -33,18 +33,9 @@ export function renderContact() {
               <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 1.5rem;">
                 <a href="${config.linkedin}" target="_blank" rel="noopener noreferrer" class="contact-direct-link" style="margin-bottom: 0;">
                   <span class="mono-label">PROFESSIONAL NETWORK</span>
-                  <span class="val">linkedin.com/in/hardik-raut/ ↗</span>
+                  <span class="val">linkedin.com/in/hardik-raut-09164936b ↗</span>
                 </a>
               </div>
-
-              ${config.github ? `
-                <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 1.5rem;">
-                  <a href="${config.github}" target="_blank" rel="noopener noreferrer" class="contact-direct-link" style="margin-bottom: 0;">
-                    <span class="mono-label">CODE & REPOSITORIES</span>
-                    <span class="val">github.com/hardik-raut ↗</span>
-                  </a>
-                </div>
-              ` : ''}
             </div>
           </div>
 

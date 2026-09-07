@@ -5,7 +5,7 @@
 
 import { INITIAL_DATA } from './data/initial-data.js';
 
-const STORAGE_KEY = 'hardik_portfolio_data_v1';
+const STORAGE_KEY = 'hardik_portfolio_data_v2';
 const AUTH_KEY = 'hardik_portfolio_admin_auth';
 
 class PortfolioStore {

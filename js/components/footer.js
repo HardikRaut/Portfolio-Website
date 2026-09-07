@@ -72,13 +72,6 @@ export function renderFooter(showCTA = true) {
                   LinkedIn Profile ↗
                 </a>
               </li>
-              ${config.github ? `
-                <li>
-                  <a href="${config.github}" target="_blank" rel="noopener noreferrer">
-                    GitHub Profile ↗
-                  </a>
-                </li>
-              ` : ''}
             </ul>
           </div>
         </div>
