@@ -1,0 +1,871 @@
+/* ==========================================================================
+   HARDIK RAUT — EDITORIAL & CASE STUDY STYLES
+   Editorial layout, magazine spreads, case studies, timelines, filters
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. HERO SECTION
+   -------------------------------------------------------------------------- */
+.hero-section {
+  padding: 5rem 0 4rem 0;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-eyebrow {
+  margin-bottom: 0.25rem;
+}
+
+.hero-headline {
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.hero-subtext {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 580px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.hero-image-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-surface);
+  border: var(--glass-border);
+  transition: transform var(--transition-smooth);
+}
+
+.hero-image-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(to top, rgba(21, 21, 21, 0.85), rgba(21, 21, 21, 0));
+  color: var(--text-light);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   2. INTRODUCTION & DISCIPLINE SUMMARY
+   -------------------------------------------------------------------------- */
+.intro-section {
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-warm-tint);
+  padding: 5rem 0;
+}
+
+.intro-content {
+  max-width: 860px;
+}
+
+.intro-heading {
+  margin: 1rem 0 1.5rem 0;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+}
+
+.intro-text {
+  font-size: 1.18rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+}
+
+.discipline-strip {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.discipline-strip span:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.8rem;
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   3. EDITORIAL PROJECT SHOWCASE (MAGAZINE SPREAD)
+   -------------------------------------------------------------------------- */
+.project-showcase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+}
+
+.editorial-project-item {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.editorial-project-item.reverse {
+  grid-template-columns: 1fr 1.35fr;
+}
+
+.editorial-project-item.reverse .project-media-col {
+  order: 2;
+}
+
+.editorial-project-item.reverse .project-info-col {
+  order: 1;
+}
+
+.project-media-col {
+  position: relative;
+}
+
+.project-img-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--bg-surface);
+  border: var(--glass-border);
+  transition: all var(--transition-smooth);
+}
+
+.project-img-frame:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+.project-img-frame img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-img-frame:hover img {
+  transform: scale(1.02);
+}
+
+.project-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.project-meta-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.project-item-title {
+  font-size: clamp(2rem, 3.2vw, 2.7rem);
+  line-height: 1.15;
+}
+
+.project-item-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.project-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   4. CURRENTLY BUILDING & THINKING
+   -------------------------------------------------------------------------- */
+.currently-section {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 6rem 0;
+}
+
+.currently-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 4.5rem;
+}
+
+.currently-building-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.currently-headline {
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  line-height: 1.15;
+}
+
+.currently-timestamp {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.thinking-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.thinking-item {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--text-secondary);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color var(--transition-fast);
+}
+
+.thinking-item:hover {
+  color: var(--text-primary);
+}
+
+.thinking-item::after {
+  content: "→";
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  opacity: 0.3;
+}
+
+/* --------------------------------------------------------------------------
+   5. ENGINEERING PHILOSOPHY
+   -------------------------------------------------------------------------- */
+.philosophy-section {
+  padding: 6rem 0;
+}
+
+.philosophy-box {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.philosophy-title {
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.philosophy-quote {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* --------------------------------------------------------------------------
+   6. FILTER BAR & WORK CATALOG
+   -------------------------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 3rem 0 4rem 0;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-md);
+  flex-wrap: wrap;
+}
+
+.filter-categories {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  padding: 0.35rem 0;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.filter-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.search-box {
+  position: relative;
+  min-width: 240px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 1rem 0.6rem 2.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.search-input:focus {
+  border-color: var(--text-primary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. PROJECT CASE STUDY DETAIL PAGE
+   -------------------------------------------------------------------------- */
+.project-detail-header {
+  padding: 4rem 0 2.5rem 0;
+}
+
+.project-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.project-back-link:hover {
+  color: var(--accent);
+}
+
+.project-detail-title {
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  line-height: 1.05;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.project-lead-quote {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 860px;
+  margin-bottom: 2.5rem;
+}
+
+.project-hero-media {
+  margin: 2.5rem 0 4.5rem 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: var(--glass-border);
+}
+
+.project-hero-media img {
+  width: 100%;
+  max-height: 620px;
+  object-fit: cover;
+}
+
+/* Story Chapters */
+.case-study-layout {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 5rem;
+  margin-bottom: 5rem;
+}
+
+.story-chapter {
+  margin-bottom: 3.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.story-chapter:last-child {
+  border-bottom: none;
+}
+
+.story-chapter-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.story-chapter-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* Specs & Sidebar */
+.specs-card {
+  position: sticky;
+  top: calc(var(--nav-height) + 2rem);
+  padding: 2rem;
+}
+
+.specs-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.spec-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.spec-val {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Documents / Downloads List */
+.documents-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 3rem;
+  margin: 4rem 0;
+}
+
+.documents-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: var(--bg-warm-tint);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.document-item:hover {
+  border-color: var(--text-primary);
+  transform: translateX(4px);
+  background: #FFFFFF;
+}
+
+.doc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.doc-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.doc-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. RESEARCH & PATENTS PAGE
+   -------------------------------------------------------------------------- */
+.research-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.research-category-block {
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.research-item-card {
+  padding: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.research-item-title {
+  font-size: 1.6rem;
+  margin: 0.5rem 0 1rem 0;
+  line-height: 1.25;
+}
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1.5px solid var(--border-color);
+}
+
+.timeline-node {
+  position: relative;
+}
+
+.timeline-node::before {
+  content: '';
+  position: absolute;
+  left: -2.4rem;
+  top: 0.4rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-primary);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   9. NOTES FROM THE WORKBENCH
+   -------------------------------------------------------------------------- */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.note-card {
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.note-card-title {
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 0.75rem 0 1rem 0;
+}
+
+.note-card-excerpt {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+/* Note Single View */
+.note-content-body {
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  white-space: pre-line;
+  margin: 3rem 0;
+}
+
+/* --------------------------------------------------------------------------
+   10. ABOUT & EXPERIENCE
+   -------------------------------------------------------------------------- */
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.skills-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.skill-category-box {
+  padding: 2rem;
+}
+
+.skill-category-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.skill-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. CONTACT & INQUIRY FORM
+   -------------------------------------------------------------------------- */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  margin-top: 3rem;
+}
+
+.contact-info-col h2 {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  margin-bottom: 1.5rem;
+}
+
+.contact-direct-card {
+  padding: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.contact-direct-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-direct-link .val {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-direct-link:hover .val {
+  color: var(--accent);
+}
+
+/* Contact Form */
+.contact-form {
+  padding: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--text-primary);
+}
+
+.form-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* --------------------------------------------------------------------------
+   12. RESUME PAGE
+   -------------------------------------------------------------------------- */
+.resume-paper {
+  background: #FFFFFF;
+  padding: 4rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+.resume-header {
+  border-bottom: 2px solid var(--text-primary);
+  padding-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.resume-section {
+  margin-bottom: 2.5rem;
+}
+
+.resume-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.2rem;
+  color: var(--text-primary);
+}
+
+@media print {
+  body { background: #FFFFFF; }
+  .site-header, .site-footer, .no-print { display: none !important; }
+  .resume-paper { box-shadow: none; border: none; padding: 0; margin: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .hero-grid,
+  .editorial-project-item,
+  .editorial-project-item.reverse,
+  .currently-grid,
+  .case-study-layout,
+  .about-hero-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .editorial-project-item.reverse .project-media-col {
+    order: 1;
+  }
+  .editorial-project-item.reverse .project-info-col {
+    order: 2;
+  }
+
+  .hero-image-wrapper img,
+  .project-img-frame img {
+    height: 320px;
+  }
+
+  .resume-paper {
+    padding: 2rem 1.5rem;
+  }
+}

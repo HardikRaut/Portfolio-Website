@@ -1,0 +1,245 @@
+/* ==========================================================================
+   HARDIK RAUT — LIGHTWEIGHT ADMIN CMS PORTAL STYLES
+   Glassmorphism Admin Dashboard, Block Editor, Media Manager, Settings
+   ========================================================================== */
+
+.admin-wrapper {
+  padding: 3rem 0 6rem 0;
+  min-height: 80vh;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-title-group h2 {
+  font-size: 2.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.admin-title-group p {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.stat-num {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Admin Tabs */
+.admin-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.admin-tab-btn {
+  padding: 0.75rem 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.admin-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.admin-tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+/* Admin Item Row / Card */
+.admin-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.admin-item-row:hover {
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-xs);
+}
+
+.admin-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.admin-item-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--bg-subtle);
+}
+
+.admin-item-info h4 {
+  font-size: 1.15rem;
+  margin-bottom: 0.2rem;
+}
+
+.admin-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-small {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.btn-danger {
+  color: #DC2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  background: rgba(220, 38, 38, 0.04);
+}
+
+.btn-danger:hover {
+  background: #DC2626;
+  color: #FFFFFF;
+}
+
+/* Form Layout in Admin */
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+}
+
+.admin-card-section {
+  padding: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-section-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Login Box */
+.admin-login-box {
+  max-width: 440px;
+  margin: 6rem auto;
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.admin-login-box h3 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-login-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Upload Media Dropzone */
+.dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  text-align: center;
+  background: var(--bg-warm-tint);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dropzone:hover {
+  border-color: var(--accent);
+  background: #FFFFFF;
+}
+
+.dropzone-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.75rem;
+}
+
+/* Backup Export / Import Box */
+.json-box {
+  width: 100%;
+  height: 200px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 1rem;
+  background: #1A1A1A;
+  color: #A3E635;
+  border-radius: var(--radius-sm);
+  border: none;
+  resize: vertical;
+}
