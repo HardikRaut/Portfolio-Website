@@ -501,13 +501,22 @@ function openProjectEditor(project, rerender) {
       currentStatus: '',
       whatsNext: ''
     },
-    specs: [],
-    tags: []
+    specs: [
+      { label: 'Stowed Volume', value: '96 × 96 × 52 mm' },
+      { label: 'Total Mass', value: '340 grams' },
+      { label: 'Material / Alloy', value: 'Al 6061-T6 Anodized' }
+    ],
+    tags: ['Space Systems', 'Mechanisms', 'CAD', 'Prototyping']
   };
+
+  const initialSpecs = p.specs && p.specs.length > 0 ? p.specs : [
+    { label: 'Stowed Volume', value: '' },
+    { label: 'Total Mass', value: '' }
+  ];
 
   openModal({
     title: isEdit ? `Edit: ${p.title}` : 'Create New Project',
-    maxWidth: '780px',
+    maxWidth: '820px',
     content: `
       <form id="project-editor-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
         <div class="admin-field-row">
@@ -534,58 +543,119 @@ function openProjectEditor(project, rerender) {
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Subcategory / Area</label>
-            <input type="text" id="pe-subcat" class="form-input" value="${p.subcategory || ''}" />
+            <label class="form-label">Subcategory / Domain</label>
+            <input type="text" id="pe-subcat" class="form-input" value="${p.subcategory || ''}" placeholder="e.g. Mechanisms / Kinematics" />
           </div>
         </div>
 
         <div class="admin-field-row">
           <div class="form-group">
             <label class="form-label">Hero Image Path</label>
-            <input type="text" id="pe-image" class="form-input" value="${p.heroImage}" />
+            <input type="text" id="pe-image" class="form-input" value="${p.heroImage}" placeholder="assets/images/..." />
           </div>
           <div class="form-group">
-            <label class="form-label">Status</label>
-            <input type="text" id="pe-status" class="form-input" value="${p.status}" />
+            <label class="form-label">Status Badge & Year</label>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 0.5rem;">
+              <input type="text" id="pe-status" class="form-input" value="${p.status}" placeholder="e.g. Testing & Iterating" />
+              <input type="text" id="pe-year" class="form-input" value="${p.year || '2026'}" placeholder="Year" />
+            </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Lead Quote</label>
-          <input type="text" id="pe-quote" class="form-input" value="${p.leadQuote || ''}" />
+          <label class="form-label">Lead Quote (Displayed under title)</label>
+          <input type="text" id="pe-quote" class="form-input" value="${p.leadQuote || ''}" placeholder="e.g. Solving fundamental volume constraints through precision mechanical tape deployment." />
         </div>
 
         <div class="form-group">
-          <label class="form-label">Short Description</label>
-          <textarea id="pe-desc" class="form-input" rows="2">${p.shortDescription}</textarea>
+          <label class="form-label">Short Summary Description</label>
+          <textarea id="pe-desc" class="form-input" rows="2" placeholder="Brief 1-2 sentence overview...">${p.shortDescription}</textarea>
         </div>
 
-        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
-          <h4 style="font-size: 1.1rem; margin-bottom: 0.75rem;">Case Study Narrative Blocks</h4>
+        <!-- Technical Specifications Table Form -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div>
+              <h4 style="font-size: 1.15rem;">Technical Specifications (Sidebar Table)</h4>
+              <p style="font-size: 0.82rem; color: var(--text-muted);">Defines key engineering metrics shown in the case study sidebar.</p>
+            </div>
+            <button type="button" class="btn-secondary btn-small" id="btn-add-spec-row" style="padding: 0.35rem 0.75rem;">
+              + Add Specification
+            </button>
+          </div>
+
+          <div id="specs-form-container" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            ${initialSpecs.map(s => `
+              <div class="spec-input-row" style="display: grid; grid-template-columns: 1fr 1.2fr 34px; gap: 0.6rem; align-items: center;">
+                <input type="text" class="form-input spec-label-input" placeholder="Spec Label (e.g. Stowed Volume)" value="${s.label || ''}" />
+                <input type="text" class="form-input spec-val-input" placeholder="Spec Value (e.g. 96 × 96 × 52 mm)" value="${s.value || ''}" />
+                <button type="button" class="btn-small btn-danger btn-remove-spec" style="height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Remove this specification">✕</button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Project Tags Form -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+          <div class="form-group">
+            <label class="form-label">Project Tags & Keywords (Comma-separated)</label>
+            <input type="text" id="pe-tags" class="form-input" value="${(p.tags || []).join(', ')}" placeholder="e.g. Space Systems, Mechanisms, CubeSat, FEA, CAD, Vacuum Testing" />
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">Tags are used for keyword search, filtering, and case study metadata tags.</p>
+          </div>
+        </div>
+
+        <!-- Case Study Narrative Blocks -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.25rem;">
+          <h4 style="font-size: 1.15rem; margin-bottom: 0.75rem;">Case Study Narrative Chapters</h4>
           
           <div class="form-group" style="margin-bottom: 0.75rem;">
-            <label class="form-label">The Problem</label>
+            <label class="form-label">01 — The Problem</label>
             <textarea id="pe-problem" class="form-input" rows="2">${p.story?.problem || ''}</textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 0.75rem;">
-            <label class="form-label">The Idea</label>
+            <label class="form-label">02 — The Idea</label>
             <textarea id="pe-idea" class="form-input" rows="2">${p.story?.idea || ''}</textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 0.75rem;">
-            <label class="form-label">Engineering Architecture</label>
+            <label class="form-label">03 — Engineering Architecture</label>
             <textarea id="pe-eng" class="form-input" rows="2">${p.story?.engineering || ''}</textarea>
           </div>
 
           <div class="form-group" style="margin-bottom: 0.75rem;">
-            <label class="form-label">What Failed (Lessons Learned)</label>
+            <label class="form-label">04 — Design & CAD</label>
+            <textarea id="pe-design" class="form-input" rows="2">${p.story?.design || ''}</textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label">05 — Building & Fabrication</label>
+            <textarea id="pe-building" class="form-input" rows="2">${p.story?.building || ''}</textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label">06 — Experimental Testing</label>
+            <textarea id="pe-testing" class="form-input" rows="2">${p.story?.testing || ''}</textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label">07 — What Failed (Lessons Learned)</label>
             <textarea id="pe-failed" class="form-input" rows="2">${p.story?.whatFailed || ''}</textarea>
           </div>
 
-          <div class="form-group">
-            <label class="form-label">What Changed (Design Iterations)</label>
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label">08 — What Changed (Design Iterations)</label>
             <textarea id="pe-changed" class="form-input" rows="2">${p.story?.whatChanged || ''}</textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label">09 — Current Status</label>
+            <textarea id="pe-status-text" class="form-input" rows="2">${p.story?.currentStatus || ''}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">10 — What's Next</label>
+            <textarea id="pe-next" class="form-input" rows="2">${p.story?.whatsNext || ''}</textarea>
           </div>
         </div>
 
@@ -597,10 +667,57 @@ function openProjectEditor(project, rerender) {
     `
   });
 
+  // Attach dynamic specification row handlers
+  const specsContainer = document.getElementById('specs-form-container');
+  const addSpecBtn = document.getElementById('btn-add-spec-row');
+
+  if (addSpecBtn && specsContainer) {
+    addSpecBtn.addEventListener('click', () => {
+      const row = document.createElement('div');
+      row.className = 'spec-input-row';
+      row.style.cssText = 'display: grid; grid-template-columns: 1fr 1.2fr 34px; gap: 0.6rem; align-items: center;';
+      row.innerHTML = `
+        <input type="text" class="form-input spec-label-input" placeholder="Spec Label (e.g. Operating Voltage)" />
+        <input type="text" class="form-input spec-val-input" placeholder="Spec Value (e.g. 2.1V - 2.8V DC)" />
+        <button type="button" class="btn-small btn-danger btn-remove-spec" style="height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;" title="Remove this specification">✕</button>
+      `;
+      specsContainer.appendChild(row);
+
+      row.querySelector('.btn-remove-spec').addEventListener('click', () => {
+        row.remove();
+      });
+    });
+
+    specsContainer.querySelectorAll('.btn-remove-spec').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.target.closest('.spec-input-row').remove();
+      });
+    });
+  }
+
   const form = document.getElementById('project-editor-form');
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+
+      // Collect specs array
+      const specRows = specsContainer ? specsContainer.querySelectorAll('.spec-input-row') : [];
+      const specs = [];
+      specRows.forEach(row => {
+        const label = row.querySelector('.spec-label-input')?.value.trim();
+        const value = row.querySelector('.spec-val-input')?.value.trim();
+        if (label || value) {
+          specs.push({ label: label || 'Specification', value: value || '—' });
+        }
+      });
+
+      // Collect tags array
+      const rawTags = document.getElementById('pe-tags')?.value || '';
+      const tags = rawTags
+        .split(',')
+        .map(t => t.trim())
+        .filter(t => t.length > 0);
+
       const updated = {
         ...p,
         title: document.getElementById('pe-title').value,
@@ -609,21 +726,29 @@ function openProjectEditor(project, rerender) {
         subcategory: document.getElementById('pe-subcat').value,
         heroImage: document.getElementById('pe-image').value,
         status: document.getElementById('pe-status').value,
+        year: document.getElementById('pe-year').value || '2026',
         leadQuote: document.getElementById('pe-quote').value,
         shortDescription: document.getElementById('pe-desc').value,
+        specs: specs,
+        tags: tags,
         story: {
           ...(p.story || {}),
-          problem: document.getElementById('pe-problem').value,
-          idea: document.getElementById('pe-idea').value,
-          engineering: document.getElementById('pe-eng').value,
-          whatFailed: document.getElementById('pe-failed').value,
-          whatChanged: document.getElementById('pe-changed').value,
+          problem: document.getElementById('pe-problem')?.value || '',
+          idea: document.getElementById('pe-idea')?.value || '',
+          engineering: document.getElementById('pe-eng')?.value || '',
+          design: document.getElementById('pe-design')?.value || '',
+          building: document.getElementById('pe-building')?.value || '',
+          testing: document.getElementById('pe-testing')?.value || '',
+          whatFailed: document.getElementById('pe-failed')?.value || '',
+          whatChanged: document.getElementById('pe-changed')?.value || '',
+          currentStatus: document.getElementById('pe-status-text')?.value || '',
+          whatsNext: document.getElementById('pe-next')?.value || '',
         }
       };
 
       store.saveProject(updated);
       closeModal();
-      showToast('Project saved successfully!', 'success');
+      showToast('Project saved with specifications and tags!', 'success');
       rerender();
     });
   }
