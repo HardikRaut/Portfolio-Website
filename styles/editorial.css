@@ -475,6 +475,34 @@
   color: var(--text-secondary);
 }
 
+.story-chapter-text p {
+  margin-bottom: 1rem;
+}
+
+.story-chapter-text p:last-child {
+  margin-bottom: 0;
+}
+
+.story-chapter-text ul {
+  margin: 0.75rem 0 1.25rem 1.5rem;
+  list-style-type: disc;
+}
+
+.story-chapter-text li {
+  margin-bottom: 0.4rem;
+}
+
+.chapter-media-frame {
+  margin: 1.75rem 0;
+}
+
+.project-video-frame video {
+  width: 100%;
+  display: block;
+  background: #000;
+  border-radius: var(--radius-sm);
+}
+
 /* Specs & Sidebar */
 .specs-card {
   position: sticky;

@@ -77,9 +77,11 @@ export function renderResearch() {
 
                   <h3 class="research-item-title" style="letter-spacing: 0.02em;">${pat.title}</h3>
                   
-                  <p style="font-size: 0.92rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.75rem;">
-                    Context: ${pat.context}
-                  </p>
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.75rem;">
+                    <span>${pat.context}</span>
+                    ${pat.appNumber ? `<span>· App No: <strong style="color: var(--text-primary);">${pat.appNumber}</strong></span>` : ''}
+                    ${pat.filedDate ? `<span>· Filed: ${pat.filedDate}</span>` : ''}
+                  </div>
 
                   <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary);">
                     ${pat.summary}

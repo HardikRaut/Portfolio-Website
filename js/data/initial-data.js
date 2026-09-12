@@ -35,55 +35,124 @@ export const INITIAL_DATA = {
     {
       id: "01",
       slug: "deployable-boom-mechanism",
-      title: "Deployable Boom Mechanism",
+      title: "A Controlled Retractable Boom Deployer with Dual-Spindle Freewheel Drive",
       projectNumber: "PROJECT 01",
       category: "Space Systems",
-      subcategory: "Mechanisms",
+      subcategory: "Deployable Mechanisms",
       year: "2026",
-      status: "Testing & Iterating",
+      status: "Operational Prototype",
       statusType: "active",
       featured: true,
       heroImage: "assets/images/hero_boom.jpg",
-      shortDescription: "A compact deployable boom mechanism developed for CubeSat-scale spacecraft, exploring pull-type deployment, dual-spindle architecture and passive overspeed protection.",
-      leadQuote: "Solving the fundamental volume constraints of small satellite payloads through precision mechanical tape deployment.",
-      overview: "Spacecraft structures frequently require deploying sensors, magnetometers, or solar arrays far from the spacecraft bus to minimize electromagnetic interference or maximize surface area. This project explores an ultra-compact sub-1U mechanism utilizing a dual-spindle freewheel drive and high-tensile metallic ribbon.",
+      shortDescription: "A reversible, sensor-free CubeSat boom deployer that uses two freewheel-clutched spindles and a self-tensioning ribbon to extend and retract structures without motors' active feedback.",
+      leadQuote: "A reversible, sensor-free CubeSat boom deployer that uses two freewheel-clutched spindles and a self-tensioning ribbon to extend and retract structures without motors' active feedback.",
+      overview: "Most CubeSat booms deploy once and never come back — spring-driven, irreversible, and prone to shock loads. This project is a dual-spindle mechanism that deploys and retracts a boom repeatably, using only mechanical clutches and ribbon tension to self-regulate speed and prevent \"blossoming\" — no motors controlling direction, no electronic feedback loop.",
       
       story: {
-        problem: "In CubeSat architectures, volumetric efficiency is paramount. Existing motorized deployers either occupy excessive volume (greater than 1.5U) or suffer from high deployment velocity spikes that introduce attitude disturbance torques to the satellite bus. Friction braking often introduces cold-welding risks in ultra-high vacuum.",
-        idea: "A pull-type deployment mechanism combining a dual-spindle spool with a passive centrifugal fluidic/eddy-current rate limiter. By unwinding a pre-stressed metallic lenticular ribbon in tension rather than push-extrusion, binding risks are drastically minimized while stowed volume remains under 0.6U.",
-        engineering: "The architecture employs a precision dual-spindle freewheel system. The primary spool houses the coiled beryllium-copper/spring steel ribbon, while the secondary tensioner spindle maintains constant engagement tension. An integrated micro-gear train connects to a compact planetary gearbox with magnetic detents.",
-        design: "Constructed with CNC machined aerospace-grade 6061-T6 aluminum housing with hard anodized coating. All internal rotating shafts utilize ceramic hybrid miniature ball bearings with Braycote vacuum grease to prevent stiction and outgassing under orbital vacuum conditions.",
-        building: "Fabricated using 5-axis CNC micro-milling for the housing and custom wire-EDM for internal gear escapements. Micro-switches and optical encoders provide non-contact deployment length verification.",
-        testing: "Subjected to 1g gravity-compensated deployment trials on an air-bearing table, thermal vacuum chamber (-40°C to +80°C) cycles, and vibration profile testing simulating PSLV launch loads.",
-        whatFailed: "Early revisions experienced ribbon slip during the final 15% of deployment due to reduced spring coil radius torque. Initial mechanical ratchet mechanisms also generated unacceptable micro-vibrations.",
-        whatChanged: "Redesigned the spindle geometry with a progressive Archimedean spiral profile and transitioned to magnetic contactless rate regulation, ensuring smooth and uniform deployment velocity from 0% to 100%.",
-        currentStatus: "Prototype rev 04 assembled and validated in ground vacuum chamber. Patent documentation in progress and manuscript drafted for submission to Acta Astronautica.",
-        whatsNext: "Microgravity parabolic flight test preparation and structural qualification for flight integration on upcoming CubeSat mission."
+        problem: `Most CubeSat booms deploy once and never come back — spring-driven, irreversible, and prone to shock loads. Traditional deployers either occupy excessive payload volume, risk catastrophic high-velocity disturbance torques during release, or cannot retract deployed sensors and solar arrays for re-stowage or orbit re-entry.`,
+        
+        idea: `<p>A dual-spindle mechanism that deploys and retracts a boom repeatably, using only mechanical clutches and ribbon tension to self-regulate speed and prevent blossoming — no motors controlling direction, no electronic feedback loop.</p>
+        <p style="margin-top: 1rem; font-weight: 600; color: var(--text-primary);">Key Highlights:</p>
+        <ul>
+          <li>Mechanically synchronized dual-spindle architecture for fully reversible boom deployment</li>
+          <li>Bidirectional freewheel clutches provide passive torque regulation and overspeed protection — no active control needed</li>
+          <li>Tension-driven ribbon actuation inherently suppresses boom "blossoming" without compression rollers</li>
+          <li>Compact sub-1U footprint (94 × 94 × 41.5 mm), validated through a fully 3D-printed prototype</li>
+          <li>Demonstrated 1 metre of repeatable deployment/retraction travel with vibration-free, synchronized motion</li>
+        </ul>`,
+
+        engineering: `<p>Two identical spindle assemblies — a Boom Spindle and a Ribbon Spindle — each contain a one-way freewheel clutch made of hinged, spring-loaded drive pins that engage ratchet grooves inside the hub. During deployment, the ribbon spindle winds in, pulling the ribbon and unspooling the boom while the boom spindle freewheels.</p>
+        <p>During retraction, the roles reverse: the boom spindle drives and rewinds both boom and ribbon while the ribbon spindle freewheels. Both clutch housings stay geared together at a fixed 2:1 ratio, so the system self-regulates — if either hub tries to spin faster than its housing (overspeed), the pins lock instantly, halting it. The ribbon itself does double duty as both the power-transmission element and the tensioning element, which is what suppresses blossoming without needing rollers or springs.</p>
+        <figure class="chapter-media-frame" style="margin-top: 1.75rem;">
+          <div class="project-img-frame" style="cursor: zoom-in;" data-img-zoom="assets/images/Boom Deployer/boom-deployer-working-explanation.png">
+            <img src="assets/images/Boom Deployer/boom-deployer-working-explanation.png" alt="Dual-Spindle Freewheel Drive Functional Working Explanation" loading="lazy" />
+          </div>
+          <figcaption style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;">
+            How It Works — Dual-Spindle Freewheel Drive kinematic synchronization and clutching architecture
+          </figcaption>
+        </figure>`,
+
+        design: `<p>Designed in CAD to fit within a 1U CubeSat envelope, the full assembly — dual spindles, redirection shaft, gear train, and boom guide — occupies just 94 × 94 × 41.5 mm. The boom guide is contoured to match the boom's transition from a flattened stowed state to its deployed C-shaped cross-section, minimizing torsional stress.</p>
+        <p>The entire prototype was 3D-printed in PLA via FDM directly from CAD geometry with no scaling, validating a clean print-to-functional pipeline.</p>
+        <figure class="chapter-media-frame" style="margin-top: 1.75rem;">
+          <div class="project-img-frame" style="cursor: zoom-in;" data-img-zoom="assets/images/Boom Deployer/boom-deployer-spindle-design.png">
+            <img src="assets/images/Boom Deployer/boom-deployer-spindle-design.png" alt="Central spindle CAD design detailing ratchet grooves and spring-loaded drive pins" loading="lazy" />
+          </div>
+          <figcaption style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;">
+            Design & CAD — Central spindle design with integrated ratchet hub and spring-loaded drive pins
+          </figcaption>
+        </figure>`,
+
+        building: `Fabricated directly from CAD models using precision FDM 3D printing in PLA. The assembly features an integrated dual-spindle layout, redirection shaft, contoured exit guide, and a 2:1 synchronized gear train connecting the two freewheel clutch housings, validating a direct print-to-functional assembly pipeline.`,
+
+        testing: `<p>The prototype was driven by a NEMA 17 stepper motor (2 A, 1/16 microstepping) and tested with a 1-metre C-section measuring tape standing in for a composite boom.</p>
+        <ul>
+          <li><strong>Deployment time (1 m):</strong> 2 min 2 sec</li>
+          <li><strong>Retraction time (1 m):</strong> 2 min 30 sec</li>
+          <li><strong>Overspeed Protection:</strong> Instantaneous clutch engagement under overspeed conditions</li>
+          <li><strong>Blossoming Suppression:</strong> Ribbon tension consistently suppressed blossoming during powered operation</li>
+        </ul>
+        <figure class="chapter-media-frame" style="margin-top: 1.75rem;">
+          <div class="project-img-frame" style="cursor: zoom-in;" data-img-zoom="assets/images/Boom Deployer/boom-deployer-prototype.jpg">
+            <img src="assets/images/Boom Deployer/boom-deployer-prototype.jpg" alt="Controlled Retractable Boom Deployer 3D-Printed Hardware Prototype" loading="lazy" />
+          </div>
+          <figcaption style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;">
+            Physical Prototype — Sub-1U FDM 3D-printed dual-spindle deployer apparatus during test bench trials
+          </figcaption>
+        </figure>
+        <div class="chapter-videos-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.75rem;">
+          <figure style="margin: 0;">
+            <div class="project-video-frame" style="border-radius: var(--radius-md); overflow: hidden; background: #000; box-shadow: var(--shadow-md); border: var(--glass-border);">
+              <video controls preload="metadata" style="width: 100%; display: block; max-height: 340px; object-fit: contain; background: #000;">
+                <source src="assets/videos/Boom Deployer/boom-deployer-deployment-test.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+            <figcaption style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;">
+              Deployment Test — 1m automated deployment in 2 min 2 sec
+            </figcaption>
+          </figure>
+          <figure style="margin: 0;">
+            <div class="project-video-frame" style="border-radius: var(--radius-md); overflow: hidden; background: #000; box-shadow: var(--shadow-md); border: var(--glass-border);">
+              <video controls preload="metadata" style="width: 100%; display: block; max-height: 340px; object-fit: contain; background: #000;">
+                <source src="assets/videos/Boom Deployer/boom-deployer-retraction-test.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+            </div>
+            <figcaption style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); margin-top: 0.75rem;">
+              Retraction Test — 1m reverse spooling and boom restowage in 2 min 30 sec
+            </figcaption>
+          </figure>
+        </div>`,
+
+        whatFailed: `A minor unpowered ribbon slack was observed during transition states, traced to small backlash in the pin-ratchet interface.`,
+
+        whatChanged: `Identified refinement path for future iterations: transitioning to continuous roller-ramp or sprag clutches and increasing ratchet groove density to eliminate backlash and prevent unpowered ribbon slack.`,
+
+        currentStatus: `Demonstrated 1 metre of repeatable deployment/retraction travel with vibration-free, synchronized motion and passive overspeed protection.`,
+
+        whatsNext: `Implementation of higher-density roller-ramp freewheel clutches, space-grade material selection (Al 6061-T6 housing and CuBe2 tape), and vacuum chamber thermal-cycling qualification.`
       },
 
       specs: [
-        { label: "Stowed Volume", value: "96 × 96 × 52 mm (< 0.6U)" },
-        { label: "Deployed Length", value: "1.85 meters" },
-        { label: "Total Mass", value: "340 grams" },
-        { label: "Deployment Velocity", value: "0.08 m/s (controlled)" },
-        { label: "Operating Temp", value: "-40°C to +85°C" },
-        { label: "Structural Material", value: "Al 6061-T6 Anodized / CuBe2" },
-        { label: "Context", value: "COEP Satellite Initiative" },
-        { label: "Intellectual Property", value: "Patent drafted & pending" }
+        { label: "Footprint", value: "94 × 94 × 41.5 mm (sub-1U)" },
+        { label: "Gear Ratio", value: "2:1 fixed (between clutch housings)" },
+        { label: "Fabrication", value: "FDM 3D printing, PLA" },
+        { label: "Test Motor", value: "NEMA 17 stepper, 2 A, 1/16 microstepping" },
+        { label: "Demonstrated Travel", value: "1 m deployment + retraction" },
+        { label: "Deployment Time", value: "2 min 2 sec (1 m)" },
+        { label: "Retraction Time", value: "2 min 30 sec (1 m)" },
+        { label: "Architecture", value: "Dual-Spindle Freewheel Drive" }
       ],
 
       gallery: [
-        { url: "assets/images/hero_boom.jpg", caption: "Close-up of CNC machined ribbon spool and guide assembly (Rev 04)." },
+        { url: "assets/images/Boom Deployer/boom-deployer-prototype.jpg", caption: "Controlled Retractable Boom Deployer sub-1U functional prototype." },
+        { url: "assets/images/Boom Deployer/boom-deployer-working-explanation.png", caption: "Dual-spindle kinematic working explanation and freewheel clutch synchronization." },
+        { url: "assets/images/Boom Deployer/boom-deployer-spindle-design.png", caption: "Central spindle CAD design detailing ratchet grooves and spring-loaded drive pins." },
         { url: "assets/images/workbench.jpg", caption: "Engineering bench setup during tape tension calibration." }
       ],
 
-      documents: [
-        { name: "Structural Analysis & Deployment Mechanics", type: "PDF Paper", size: "4.2 MB", filename: "Boom_Mechanism_ActaAstronautica_Draft.pdf" },
-        { name: "CAD Package & Exploded Assembly Drawing", type: "STEP / PDF", size: "18.5 MB", filename: "Boom_Assembly_Rev04.zip" },
-        { name: "Thermal Vacuum Test Data Log", type: "CSV", size: "1.4 MB", filename: "TVAC_Test_Telemetry_2026.csv" }
-      ],
-
-      tags: ["Space Systems", "Mechanisms", "CubeSat", "FEA", "CAD", "Vacuum Testing"]
+      tags: ["Space Structures", "Deployable Mechanisms", "CubeSat", "Mechanism Design", "FEA/CAD", "FDM Prototyping"]
     },
 
     {
@@ -434,23 +503,58 @@ export const INITIAL_DATA = {
       {
         id: "pub-01",
         title: "Structural Optimization of a Rigid Boom Structure for a Patch Antenna for Satellite Applications",
-        venue: "Research Manuscript / Technical Paper",
+        venue: "Simcenter Technology Conference / Technical Manuscript",
         year: "2026",
         authors: "Hardik Raut, et al.",
-        status: "Under Review / Drafted",
-        abstract: "This paper presents the finite element modeling, modal analysis, and mass-optimization of an ultra-compact deployable rigid boom structure designed to support high-gain patch antennas on small satellite platforms. The structural dynamics under vibrational launch loads and thermal orbital gradients are evaluated.",
-        tags: ["Space Structures", "FEA", "Satellite Antennas", "Optimization"]
+        status: "Conference Paper",
+        abstract: "Finite element modeling, modal analysis, and mass-optimization of an ultra-compact deployable rigid boom structure designed to support high-gain patch antennas on satellite platforms under launch vibration PSD profiles and space-environment loading.",
+        tags: ["Space Structures", "FEA", "Satellite Antennas", "Structural Optimization"]
       }
     ],
     patents: [
       {
         id: "pat-01",
-        title: "A DEPLOYABLE AND RETRACTABLE MEMBRANE DEPLOYMENT SYSTEM",
-        context: "Associated with deployable solar-array / membrane system developed through the CSAT initiative.",
-        status: "Patent in progress",
+        title: "A Deployable and Retractable Membrane Deployment System",
+        context: "Patent under COEP Satellite Initiative",
+        appNumber: "202621073997",
+        filedDate: "Jun 15, 2026",
+        status: "Application Filed",
         statusBadge: "Pending Application",
         year: "2026",
-        summary: "A mechanism facilitating controlled, jam-free bi-directional deployment and retraction of flexible membrane substrates in volume-constrained aerospace vehicles."
+        summary: "A mechanism facilitating controlled, jam-free bi-directional deployment and retraction of flexible membrane substrates and deployable solar arrays in volume-constrained aerospace vehicles."
+      },
+      {
+        id: "pat-02",
+        title: "Freewheel based Deployer for Satellite",
+        context: "Personal Patent",
+        appNumber: "202521120359",
+        filedDate: "Dec 2, 2025",
+        status: "Application Filed",
+        statusBadge: "Pending Application",
+        year: "2025",
+        summary: "A compact pull-type retractable boom deployer for CubeSat applications featuring a dual-spindle freewheel mechanism and tension-driven ribbon actuation for controlled, reversible deployment with passive overspeed protection."
+      },
+      {
+        id: "pat-03",
+        title: "Electrolytic Thruster",
+        context: "Personal Patent",
+        appNumber: "473721-001",
+        filedDate: "Sep 16, 2025",
+        status: "Patent Granted",
+        statusBadge: "Granted",
+        year: "2025",
+        summary: "A compact satellite propulsion system architecture integrating onboard pulsed water electrolysis with vacuum-compatible micropropulsion expansion for non-toxic in-orbit maneuvering."
+      },
+      {
+        id: "pat-04",
+        title: "The Cloud Chamber",
+        context: "Personal Patent",
+        appNumber: "202421059911",
+        filedDate: "Aug 8, 2024",
+        status: "Application Filed",
+        statusBadge: "Pending Application",
+        year: "2024",
+        summary: "A continuously operating solid-state diffusion cloud chamber apparatus with thermoelectric multi-stage Peltier cooling, high-voltage electrostatic clearing grid, and precision illumination for real-time particle track visualization."
       }
     ],
     conferences: [
@@ -458,36 +562,29 @@ export const INITIAL_DATA = {
         id: "conf-01",
         title: "Simcenter Technology Conference 2026",
         location: "Pune, India",
-        year: "2026",
-        topic: "Advanced FEA simulation and structural dynamics in small satellite mechanisms."
+        year: "May 7, 2026",
+        topic: "Presented research paper: 'Structural Optimization of a Rigid Boom Structure for a Patch Antenna for Satellite Applications' — showcasing computational approaches to aerospace structural FEA, modal analysis, and optimization."
       },
       {
         id: "conf-02",
-        title: "GeoSmart India Conference",
-        location: "Hyderabad, India",
-        year: "2025",
-        topic: "Space technology and geospatial satellite platform payloads."
-      },
-      {
-        id: "conf-03",
-        title: "India-Japan Space and Geospatial Round Table Conference",
-        location: "New Delhi / Hybrid",
-        year: "2024",
-        topic: "Bilateral technical exchange in space systems and innovative hardware development."
+        title: "GeoSmart India Conference 2025 (incl. India–Japan Space & Geospatial Roundtable)",
+        location: "Delhi, India",
+        year: "Dec 2–5, 2025",
+        topic: "Represented CSAT at the GeoSmart India Conference in Delhi and participated in the India–Japan Space & Geospatial Roundtable, engaging with industry, defense, and international aerospace stakeholders on satellite platform architectures."
       }
     ],
     awards: [
       {
         id: "award-01",
-        title: "Best Social Impact — Undergraduate Project Competition",
-        forItem: "EMG Sensor-Actuated Bionic Arm",
-        year: "2024"
+        title: "1st Place — Best Social Impact Category",
+        forItem: "The Bionic Arm (UG Project Competition at COEP)",
+        year: "Jun 21, 2025"
       },
       {
         id: "award-02",
         title: "Best Paper Presenter Team",
-        forItem: "Effects of Constructive Divergence on Problem Solving Approaches",
-        year: "2024"
+        forItem: "Effect of Constructive Divergence on Problem Solving Approaches (Industrial Psychology)",
+        year: "Dec 5, 2024"
       }
     ]
   },

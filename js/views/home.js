@@ -38,10 +38,10 @@ export function renderHome() {
           </div>
 
           <div class="hero-image-wrapper">
-            <img src="assets/images/hero_boom.jpg" alt="CubeSat Deployable Boom Mechanism Hardware Prototype" loading="eager" />
+            <img src="assets/images/hero_boom.jpg" alt="Controlled Retractable Boom Deployer Hardware Prototype" loading="eager" />
             <div class="hero-image-caption">
-              <span>DEPLOYABLE BOOM MECHANISM</span>
-              <span>CSAT · REV 04</span>
+              <span>RETRACTABLE BOOM DEPLOYER</span>
+              <span>SUB-1U CUBESAT MECHANISM</span>
             </div>
           </div>
         </div>

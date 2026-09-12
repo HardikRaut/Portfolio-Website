@@ -71,7 +71,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">01 — THE PROBLEM</span>
                 <h2 class="story-chapter-title">The challenge & constraints</h2>
-                <p class="story-chapter-text">${project.story.problem}</p>
+                <div class="story-chapter-text">${project.story.problem}</div>
               </div>
             ` : ''}
 
@@ -79,7 +79,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">02 — THE IDEA</span>
                 <h2 class="story-chapter-title">Initial concept & architecture</h2>
-                <p class="story-chapter-text">${project.story.idea}</p>
+                <div class="story-chapter-text">${project.story.idea}</div>
               </div>
             ` : ''}
 
@@ -87,7 +87,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">03 — ENGINEERING</span>
                 <h2 class="story-chapter-title">System mechanics & kinematics</h2>
-                <p class="story-chapter-text">${project.story.engineering}</p>
+                <div class="story-chapter-text">${project.story.engineering}</div>
               </div>
             ` : ''}
 
@@ -95,7 +95,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">04 — DESIGN & CAD</span>
                 <h2 class="story-chapter-title">Materials, tolerance & CAD modeling</h2>
-                <p class="story-chapter-text">${project.story.design}</p>
+                <div class="story-chapter-text">${project.story.design}</div>
               </div>
             ` : ''}
 
@@ -103,7 +103,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">05 — BUILDING & FABRICATION</span>
                 <h2 class="story-chapter-title">Machining, assembly & firmware</h2>
-                <p class="story-chapter-text">${project.story.building}</p>
+                <div class="story-chapter-text">${project.story.building}</div>
               </div>
             ` : ''}
 
@@ -111,7 +111,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">06 — EXPERIMENTAL TESTING</span>
                 <h2 class="story-chapter-title">Telemetry, calibration & data results</h2>
-                <p class="story-chapter-text">${project.story.testing}</p>
+                <div class="story-chapter-text">${project.story.testing}</div>
               </div>
             ` : ''}
 
@@ -119,7 +119,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter" style="background: rgba(194, 65, 12, 0.03); padding: 2rem; border-radius: var(--radius-sm); border: 1px solid rgba(194, 65, 12, 0.15);">
                 <span class="mono-label" style="color: var(--accent);">07 — WHAT FAILED</span>
                 <h2 class="story-chapter-title" style="color: var(--accent);">Failure modes & unexpected physics</h2>
-                <p class="story-chapter-text">${project.story.whatFailed}</p>
+                <div class="story-chapter-text">${project.story.whatFailed}</div>
               </div>
             ` : ''}
 
@@ -127,7 +127,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">08 — WHAT CHANGED</span>
                 <h2 class="story-chapter-title">Design iterations & solutions</h2>
-                <p class="story-chapter-text">${project.story.whatChanged}</p>
+                <div class="story-chapter-text">${project.story.whatChanged}</div>
               </div>
             ` : ''}
 
@@ -135,7 +135,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">09 — CURRENT STATUS</span>
                 <h2 class="story-chapter-title">Where the system stands</h2>
-                <p class="story-chapter-text">${project.story.currentStatus}</p>
+                <div class="story-chapter-text">${project.story.currentStatus}</div>
               </div>
             ` : ''}
 
@@ -143,7 +143,7 @@ export function renderProjectDetail(slug) {
               <div class="story-chapter">
                 <span class="mono-label" style="color: var(--accent);">10 — WHAT'S NEXT</span>
                 <h2 class="story-chapter-title">Upcoming roadmap & flight prep</h2>
-                <p class="story-chapter-text">${project.story.whatsNext}</p>
+                <div class="story-chapter-text">${project.story.whatsNext}</div>
               </div>
             ` : ''}
           </div>
@@ -191,32 +191,7 @@ export function renderProjectDetail(slug) {
           </div>
         ` : ''}
 
-        <!-- 4. Documentation & Downloads -->
-        ${project.documents && project.documents.length > 0 ? `
-          <div class="documents-section">
-            <span class="mono-label" style="color: var(--accent);">ENGINEERING ASSETS</span>
-            <h2 style="font-size: 2.2rem; margin-top: 0.4rem;">Documentation & technical files</h2>
-            <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-              Peer-reviewed manuscripts, CAD packages, test logs, and technical reports associated with this project.
-            </p>
-
-            <ul class="documents-list">
-              ${project.documents.map(doc => `
-                <li class="document-item">
-                  <div class="doc-info">
-                    <span class="doc-name">${doc.name}</span>
-                    <span class="doc-meta">${doc.type} · ${doc.size} · ${doc.filename}</span>
-                  </div>
-                  <button class="btn-secondary doc-download-btn" data-doc-name="${doc.name}" data-filename="${doc.filename}" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
-                    Download ↓
-                  </button>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        ` : ''}
-
-        <!-- 5. Next Project Footer Navigation -->
+        <!-- 4. Next Project Footer Navigation -->
         <div style="margin: 6rem 0 2rem 0; padding-top: 3rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
           <a href="#/work" class="link-arrow">
             ← All projects
@@ -249,15 +224,6 @@ export function initProjectDetailEvents() {
         `,
         maxWidth: '900px'
       });
-    });
-  });
-
-  // Download simulation handler
-  document.querySelectorAll('.doc-download-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const docName = btn.dataset.docName;
-      const filename = btn.dataset.filename;
-      showToast(`Initiating download for "${filename}"`, 'success');
     });
   });
 }
